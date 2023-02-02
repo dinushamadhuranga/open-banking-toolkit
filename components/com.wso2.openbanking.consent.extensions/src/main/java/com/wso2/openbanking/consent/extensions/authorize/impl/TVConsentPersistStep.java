@@ -27,9 +27,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Consent persist step sample implementation.
- */
 public class TVConsentPersistStep implements ConsentPersistStep {
 
     private static final Log logger = LogFactory.getLog(TVConsentPersistStep.class);

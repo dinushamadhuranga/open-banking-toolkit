@@ -29,9 +29,6 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.*;
 
-/**
- * Consent Manage handler implementation for
- */
 public class TVConsentManageHandler implements ConsentManageHandler {
 
     private static final Log log = LogFactory.getLog(TVConsentManageHandler.class);

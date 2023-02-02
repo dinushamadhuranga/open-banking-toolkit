@@ -25,10 +25,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Default implementation class for AbstractApplicationUpdater which should be extended for spec specific
- * tasks
- */
 public class TVApplicationUpdaterImpl extends ApplicationUpdaterImpl {
 
     @Override

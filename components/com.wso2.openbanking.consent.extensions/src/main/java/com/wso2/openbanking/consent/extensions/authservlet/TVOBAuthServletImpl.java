@@ -28,9 +28,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/**
- * The Sample implementation of servlet extension
- */
 public class TVOBAuthServletImpl implements OBAuthServletInterface {
 
     OBDefaultAuthServletImpl obDefaultAuthServlet = new OBDefaultAuthServletImpl();

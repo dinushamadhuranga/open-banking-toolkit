@@ -24,10 +24,6 @@ import org.apache.commons.logging.LogFactory;
 import java.util.ArrayList;
 import java.util.Base64;
 
-/**
- * API Resource Access Validation executor
- * This executor validates the grant type
- */
 public class TVOpenBankingGatewayExecutor implements OpenBankingGatewayExecutor {
 
     private static final Log log = LogFactory.getLog(TVOpenBankingGatewayExecutor.class);

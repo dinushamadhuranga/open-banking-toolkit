@@ -25,9 +25,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-/**
- * Sample implementation for dcr registration VALIDATOR class
- */
 public class TVRegistrationValidatorImpl extends DefaultRegistrationValidatorImpl {
 
     private static final String LOGO_URI = "logo_uri";

@@ -18,9 +18,6 @@ import com.wso2.openbanking.accelerator.gateway.executor.model.OBAPIRequestConte
 
 import java.util.List;
 
-/**
- * Sample implementation of Default Request Router.
- */
 public class TVRequestRouter extends DefaultRequestRouter {
 
     @Override
