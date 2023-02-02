@@ -30,9 +30,9 @@ import java.net.URL;
 /**
  * Consent persist step sample implementation.
  */
-public class CustomConsentPersistStep implements ConsentPersistStep {
+public class TVConsentPersistStep implements ConsentPersistStep {
 
-    private static final Log logger = LogFactory.getLog(CustomConsentPersistStep.class);
+    private static final Log logger = LogFactory.getLog(TVConsentPersistStep.class);
 
     @Override
     public void execute(ConsentPersistData consentPersistData) throws ConsentException {
@@ -41,13 +41,14 @@ public class CustomConsentPersistStep implements ConsentPersistStep {
 
         if (consentPersistData.getApproval()) {
             try {
+                //
                 URL url = new URL("http://localhost:8080/send-otp-notification");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setRequestProperty("Accept", "application/json");
 
                 if (httpURLConnection.getResponseCode() != 200) {
-                    throw new OpenBankingException("Failed : HTTP error code : "
+                    throw new OpenBankingException("Failed sending SMS OTP : "
                             + httpURLConnection.getResponseCode());
                 }
 

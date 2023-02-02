@@ -6,7 +6,7 @@ import com.wso2.openbanking.accelerator.gateway.executor.model.OBAPIResponseCont
 
 import java.util.Map;
 
-public class APIInvocationGatewayExecutor implements OpenBankingGatewayExecutor {
+public class TVAPIInvocationGatewayExecutor implements OpenBankingGatewayExecutor {
     @Override
     public void preProcessRequest(OBAPIRequestContext obapiRequestContext) {
         boolean isUserPresent = obapiRequestContext.getMsgInfo().getHeaders().containsKey("PSU-IP-Address");

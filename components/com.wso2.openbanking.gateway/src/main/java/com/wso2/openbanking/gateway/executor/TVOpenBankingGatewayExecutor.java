@@ -21,7 +21,6 @@ import com.wso2.openbanking.accelerator.gateway.executor.model.OpenBankingExecut
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 
@@ -29,9 +28,9 @@ import java.util.Base64;
  * API Resource Access Validation executor
  * This executor validates the grant type
  */
-public class CustomOpenBankingGatewayExecutor implements OpenBankingGatewayExecutor {
+public class TVOpenBankingGatewayExecutor implements OpenBankingGatewayExecutor {
 
-    private static final Log log = LogFactory.getLog(CustomOpenBankingGatewayExecutor.class);
+    private static final Log log = LogFactory.getLog(TVOpenBankingGatewayExecutor.class);
 
     @Override
     public void preProcessRequest(OBAPIRequestContext obapiRequestContext) {
@@ -43,20 +42,14 @@ public class CustomOpenBankingGatewayExecutor implements OpenBankingGatewayExecu
             String tokenPayloadString = new String(decoder.decode(base64EncodedBody));
             JsonParser jsonParser = new JsonParser();
             JsonObject tokenPayloadJson = (JsonObject)jsonParser.parse(tokenPayloadString);
-            if (!tokenPayloadJson.get("scope").toString().contains("accounts")) {
-                log.error("Error occurred while validating token scopes");
-                this.handleBadRequestError(obapiRequestContext, "Error occurred while validating scopes");
+            if (!tokenPayloadJson.get("tpp_role").toString().contains("AISP")) {
+                log.error("Error occurred while validating token roles");
+                OpenBankingExecutorError error = new OpenBankingExecutorError("Forbidden", "invalid_scope", "Error occurred while validating roles", "403");
+                ArrayList<OpenBankingExecutorError> executorErrors = obapiRequestContext.getErrors();
+                executorErrors.add(error);
+                obapiRequestContext.setError(true);
+                obapiRequestContext.setErrors(executorErrors);
             }
-
-            JsonObject requestPayloadJson = (JsonObject) jsonParser.parse(obapiRequestContext.getRequestPayload());
-            String expDateVal = requestPayloadJson.get("ExpirationDateTime").toString();
-            OffsetDateTime expDate = OffsetDateTime.parse(expDateVal);
-            OffsetDateTime currDate = OffsetDateTime.now(expDate.getOffset());
-            if (expDate.compareTo(currDate) > 0) {
-                log.error("Provided expiry date is: " + expDate + " current date is: " + currDate);
-                this.handleBadRequestError(obapiRequestContext, "Error occurred while validating ExpirationDateTime");
-            }
-
         }
     }
 
@@ -73,13 +66,5 @@ public class CustomOpenBankingGatewayExecutor implements OpenBankingGatewayExecu
     @Override
     public void postProcessResponse(OBAPIResponseContext obapiResponseContext) {
 
-    }
-
-    private void handleBadRequestError(OBAPIRequestContext obapiRequestContext, String message) {
-        OpenBankingExecutorError error = new OpenBankingExecutorError("Forbidden", "invalid_scope", message, "403");
-        ArrayList<OpenBankingExecutorError> executorErrors = obapiRequestContext.getErrors();
-        executorErrors.add(error);
-        obapiRequestContext.setError(true);
-        obapiRequestContext.setErrors(executorErrors);
     }
 }

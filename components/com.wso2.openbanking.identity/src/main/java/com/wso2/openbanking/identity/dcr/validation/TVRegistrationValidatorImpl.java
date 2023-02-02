@@ -28,13 +28,15 @@ import java.util.Map;
 /**
  * Sample implementation for dcr registration VALIDATOR class
  */
-public class CustomRegistrationValidatorImpl extends DefaultRegistrationValidatorImpl {
+public class TVRegistrationValidatorImpl extends DefaultRegistrationValidatorImpl {
+
+    private static final String LOGO_URI = "logo_uri";
 
     @Override
     public void validatePost(RegistrationRequest registrationRequest) throws DCRValidationException {
         String logoUri = null;
-        if (registrationRequest.getSsaParameters().containsKey("logo_uri")) {
-            logoUri = registrationRequest.getSsaParameters().get("logo_uri").toString();
+        if (registrationRequest.getSsaParameters().containsKey(LOGO_URI)) {
+            logoUri = registrationRequest.getSsaParameters().get(LOGO_URI).toString();
         }
 
         if (logoUri == null || !this.isValidUrl(logoUri)) {
@@ -56,7 +58,7 @@ public class CustomRegistrationValidatorImpl extends DefaultRegistrationValidato
 
         Gson gson = new Gson();
         JsonElement jsonElement = gson.toJsonTree(spMetaData);
-        CustomExtendedRegistrationResponse registrationResponse = gson.fromJson(jsonElement, CustomExtendedRegistrationResponse.class);
+        TVExtendedRegistrationResponse registrationResponse = gson.fromJson(jsonElement, TVExtendedRegistrationResponse.class);
         return gson.toJson(registrationResponse);
     }
 

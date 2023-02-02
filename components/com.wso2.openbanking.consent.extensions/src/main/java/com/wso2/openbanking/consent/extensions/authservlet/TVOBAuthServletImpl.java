@@ -12,27 +12,47 @@
 
 package com.wso2.openbanking.consent.extensions.authservlet;
 
+import com.wso2.openbanking.accelerator.common.exception.OpenBankingRuntimeException;
 import com.wso2.openbanking.accelerator.consent.extensions.authservlet.impl.OBDefaultAuthServletImpl;
 import com.wso2.openbanking.accelerator.consent.extensions.authservlet.model.OBAuthServletInterface;
+import com.wso2.openbanking.accelerator.consent.extensions.common.ResponseStatus;
 import org.json.JSONObject;
+import org.wso2.carbon.identity.application.common.IdentityApplicationManagementException;
+import org.wso2.carbon.identity.application.common.model.ServiceProvider;
+import org.wso2.carbon.identity.application.common.model.ServiceProviderProperty;
+import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 
-import java.util.Map;
-import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 /**
  * The Sample implementation of servlet extension
  */
-public class OBCustomAuthServletImpl implements OBAuthServletInterface {
+public class TVOBAuthServletImpl implements OBAuthServletInterface {
 
     OBDefaultAuthServletImpl obDefaultAuthServlet = new OBDefaultAuthServletImpl();
+
+    private static final String LOGO_URI = "logo_uri";
+    private static final String TENANT_DOMAIN = "carbon.super";
 
     @Override
     public Map<String, Object> updateRequestAttribute(HttpServletRequest httpServletRequest, JSONObject jsonObject,
                                                       ResourceBundle resourceBundle) {
         Map<String, Object> returnMaps = obDefaultAuthServlet.updateRequestAttribute(httpServletRequest, jsonObject, resourceBundle);
-        returnMaps.put("logo_uri", "https://lh3.googleusercontent.com/p/AF1QipMjUdQJRVQcgFC32m5im_Z4iGvrdYL5YETpKCiX=s680-w680-h510");
-        return returnMaps;
+        try {
+            ApplicationManagementService applicationManagementService = ApplicationManagementService.getInstance();
+            ServiceProvider serviceProvider = applicationManagementService.getServiceProvider(jsonObject.get("application").toString(), TENANT_DOMAIN);
+            Optional<ServiceProviderProperty> optionalLogoUri = Arrays.stream(serviceProvider.getSpProperties())
+                    .filter(serviceProviderProperty -> serviceProviderProperty.getName().equals(LOGO_URI))
+                    .findFirst();
+            optionalLogoUri.ifPresent(serviceProviderProperty -> returnMaps.put(LOGO_URI, serviceProviderProperty.getValue()));
+            return returnMaps;
+        } catch (IdentityApplicationManagementException e) {
+            throw new OpenBankingRuntimeException(ResponseStatus.INTERNAL_SERVER_ERROR.toString(), e);
+        }
     }
 
     @Override

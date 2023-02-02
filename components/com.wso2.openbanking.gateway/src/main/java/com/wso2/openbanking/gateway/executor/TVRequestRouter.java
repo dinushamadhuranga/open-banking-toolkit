@@ -15,14 +15,13 @@ package com.wso2.openbanking.gateway.executor;
 import com.wso2.openbanking.accelerator.gateway.executor.core.DefaultRequestRouter;
 import com.wso2.openbanking.accelerator.gateway.executor.core.OpenBankingGatewayExecutor;
 import com.wso2.openbanking.accelerator.gateway.executor.model.OBAPIRequestContext;
-import com.wso2.openbanking.accelerator.gateway.executor.model.OBAPIResponseContext;
 
 import java.util.List;
 
 /**
  * Sample implementation of Default Request Router.
  */
-public class CustomRequestRouter extends DefaultRequestRouter {
+public class TVRequestRouter extends DefaultRequestRouter {
 
     @Override
     public List<OpenBankingGatewayExecutor> getExecutorsForRequest(OBAPIRequestContext requestContext) {

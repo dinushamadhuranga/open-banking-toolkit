@@ -377,10 +377,10 @@ connection_verification_timeout=1
 
 #=======================dcr configs======================
 [open_banking.dcr]
-validator = "com.wso2.openbanking.identity.dcr.validation.CustomRegistrationValidatorImpl"
+validator = "com.wso2.openbanking.identity.dcr.validation.TVRegistrationValidatorImpl"
 jwks_url_sandbox = "https://keystore.openbankingtest.org.uk/0015800001HQQrZAAX/9b5usDpbNtmxDcTzs7GzKp.jwks"
 jwks_url_production = "https://keystore.openbankingtest.org.uk/0015800001HQQrZAAX/9b5usDpbNtmxDcTzs7GzKp.jwks"
-applicationupdater = "com.wso2.openbanking.identity.listener.application.CustomApplicationUpdaterImpl"
+applicationupdater = "com.wso2.openbanking.identity.listener.application.TVApplicationUpdaterImpl"
 use_softwareIdForAppName = true
 #jwks_endpoint_name = ""
 [open_banking.dcr.jwks_retriever]
@@ -485,11 +485,11 @@ class = "com.wso2.openbanking.consent.extensions.authorize.impl.SampleRetrievalS
 priority = 2
 
 [[open_banking.consent.authorize_steps.persist]]
-class = "com.wso2.openbanking.consent.extensions.authorize.impl.CustomConsentPersistStep"
+class = "com.wso2.openbanking.consent.extensions.authorize.impl.TVConsentPersistStep"
 priority = 1
 
 [open_banking.consent.manage]
-handler="com.wso2.openbanking.consent.extensions.manage.impl.CustomConsentManageHandler"
+handler="com.wso2.openbanking.consent.extensions.manage.impl.TVConsentManageHandler"
 
 [open_banking.consent.validation]
 validator="com.wso2.openbanking.consent.extensions.validate.SampleConsentValidator"
@@ -511,7 +511,7 @@ expired_consent_status_value="Expired"
 eligible_statuses="authorised"
 
 [open_banking.identity.authentication_webapp]
-servlet_extension = "com.wso2.openbanking.consent.extensions.authservlet.OBCustomAuthServletImpl"
+servlet_extension = "com.wso2.openbanking.consent.extensions.authservlet.TVOBAuthServletImpl"
 
 [open_banking.identity.extensions]
 request_object_validator="com.wso2.openbanking.identity.auth.extensions.request.validator.SampleRequestObjectValidator"
