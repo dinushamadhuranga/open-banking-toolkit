@@ -1,0 +1,13 @@
+
+@App:name("DCRRawDataApp")
+
+@source(type='wso2event',  @map(type='wso2event'))
+define stream DCRInputStream(APPLICATION_NAME string);
+
+@primaryKey('APPLICATION_NAME')
+@store(type='rdbms', datasource='OB_REPORTING_DB')
+define table RCR_RAW_DATA(APPLICATION_NAME string);
+
+from DCRInputStream
+select APPLICATION_NAME
+insert into RCR_RAW_DATA;
