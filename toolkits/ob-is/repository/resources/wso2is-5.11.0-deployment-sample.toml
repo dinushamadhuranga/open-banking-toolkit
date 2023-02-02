@@ -337,19 +337,19 @@ retrieve_uma_permission_info_through_introspection = true
 
 [oauth.grant_type.refresh_token]
 enable=true
-grant_handler="com.wso2.openbanking.identity.grant.type.handlers.SampleOBRefreshGrantHandler"
+grant_handler="com.wso2.openbanking.accelerator.identity.grant.type.handlers.OBRefreshGrantHandler"
 
 [oauth.grant_type.authorization_code]
 enable=true
-grant_handler="com.wso2.openbanking.identity.grant.type.handlers.SampleOBAuthorizationCodeGrantHandler"
+grant_handler="com.wso2.openbanking.accelerator.identity.grant.type.handlers.OBAuthorizationCodeGrantHandler"
 
 [oauth.grant_type.password]
 enable=true
-grant_handler="com.wso2.openbanking.identity.grant.type.handlers.SampleOBPasswordGrantHandler"
+grant_handler="com.wso2.openbanking.accelerator.identity.grant.type.handlers.OBPasswordGrantHandler"
 
 [oauth.grant_type.client_credentials]
 enable=true
-grant_handler="com.wso2.openbanking.identity.grant.type.handlers.SampleOBClientCredentialsGrantHandler"
+grant_handler="com.wso2.openbanking.accelerator.identity.grant.type.handlers.OBClientCredentialsGrantHandler"
 
 [oauth.oidc.extensions]
 claim_callback_handler="com.wso2.openbanking.accelerator.identity.claims.OBDefaultOIDCClaimsCallbackHandler"
@@ -481,7 +481,7 @@ class = "com.wso2.openbanking.accelerator.consent.extensions.authorize.impl.NonR
 priority = 1
 
 [[open_banking.consent.authorize_steps.retrieve]]
-class = "com.wso2.openbanking.consent.extensions.authorize.impl.SampleRetrievalStep"
+class = "com.wso2.openbanking.accelerator.consent.extensions.authorize.impl.DefaultConsentRetrievalStep"
 priority = 2
 
 [[open_banking.consent.authorize_steps.persist]]
@@ -492,7 +492,7 @@ priority = 1
 handler="com.wso2.openbanking.consent.extensions.manage.impl.TVConsentManageHandler"
 
 [open_banking.consent.validation]
-validator="com.wso2.openbanking.consent.extensions.validate.SampleConsentValidator"
+validator="com.wso2.openbanking.accelerator.consent.extensions.validate.impl.DefaultConsentValidator"
 
 [open_banking.consent.validation.signature]
 alias="wso2carbon"
@@ -514,9 +514,8 @@ eligible_statuses="authorised"
 servlet_extension = "com.wso2.openbanking.consent.extensions.authservlet.TVOBAuthServletImpl"
 
 [open_banking.identity.extensions]
-request_object_validator="com.wso2.openbanking.identity.auth.extensions.request.validator.SampleRequestObjectValidator"
+request_object_validator="com.wso2.openbanking.accelerator.identity.auth.extensions.request.validator.DefaultOBRequestObjectValidator"
 push_auth_request_validator="com.wso2.openbanking.accelerator.identity.push.auth.extension.request.validator.PushAuthRequestValidator"
-claim_provider="com.wso2.openbanking.identity.claims.OBSampleClaimProvider"
 
 [open_banking.identity.application_information_webapp]
 sp_metadata_filter="com.wso2.openbanking.accelerator.identity.sp.metadata.extension.impl.DefaultSPMetadataFilter"
