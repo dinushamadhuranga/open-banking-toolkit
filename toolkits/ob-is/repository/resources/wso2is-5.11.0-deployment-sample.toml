@@ -394,12 +394,12 @@ name = "OpenBanking Ltd"
 #[[open_banking.signature_validation.allowed_algorithms]]
 #name = "PS256"
 
-#[open_banking.sca.primaryauth]
-#name = "IdentifierExecutor"
-#display = "ob-identifier-first"
+[open_banking.sca.primaryauth]
+name = "BasicAuthenticator"
+display = "basic"
 
-#[open_banking.sca.idp]
-#name = ""
+[open_banking.sca.idp]
+name = "SMSAuthentication"
 
 #[open_banking.dcr.registration.grant_types]
 #required = true
