@@ -435,7 +435,7 @@ api_name = "AccountandTransactionAPI"
 roles = "AISP"
 
 [open_banking.gateway]
-request_router = "com.wso2.openbanking.gateway.executor.TVRequestRouter"
+request_router = "com.tv.openbanking.gateway.executor.TVRequestRouter"
 
 #============executors=========================
 [[open_banking.gateway.openbanking_gateway_executors.type]]
@@ -456,7 +456,7 @@ priority = 4
 name = "com.wso2.openbanking.accelerator.gateway.executor.impl.common.reporting.data.executor.CommonReportingDataExecutor"
 priority = 5
 [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-name = "com.wso2.openbanking.gateway.executor.TVAPIInvocationGatewayExecutor"
+name = "com.tv.openbanking.gateway.executor.TVAPIInvocationGatewayExecutor"
 priority = 6
 [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
 name = "com.wso2.openbanking.accelerator.gateway.executor.impl.error.handler.OBDefaultErrorHandler"
@@ -474,7 +474,7 @@ priority = 2
 name = "com.wso2.openbanking.accelerator.gateway.executor.dcr.DCRExecutor"
 priority = 3
 [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-name = "com.wso2.openbanking.gateway.executor.TVAPIInvocationGatewayExecutor"
+name = "com.tv.openbanking.gateway.executor.TVAPIInvocationGatewayExecutor"
 priority = 4
 [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
 name = "com.wso2.openbanking.accelerator.gateway.executor.impl.error.handler.OBDefaultErrorHandler"
@@ -489,10 +489,10 @@ priority = 1
 name = "com.wso2.openbanking.accelerator.gateway.executor.impl.api.resource.access.validation.APIResourceAccessValidationExecutor"
 priority = 2
 [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-name = "com.wso2.openbanking.gateway.executor.TVOpenBankingGatewayExecutor"
+name = "com.tv.openbanking.gateway.executor.TVOpenBankingGatewayExecutor"
 priority = 3
 [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-name = "com.wso2.openbanking.gateway.executor.TVAPIInvocationGatewayExecutor"
+name = "com.tv.openbanking.gateway.executor.TVAPIInvocationGatewayExecutor"
 priority = 4
 [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
 name = "com.wso2.openbanking.accelerator.gateway.executor.impl.error.handler.OBDefaultErrorHandler"
